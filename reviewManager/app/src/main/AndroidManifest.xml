@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".ViewActivity"></activity>
+        <activity android:name=".ParticluarMovieReviews"></activity>
+        <activity android:name=".ViewParticularReview" />
+        <activity android:name=".ViewParticularActivity" />
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".ViewActivity" />
         <activity android:name=".ViewReview" />
         <activity android:name=".EnterDetails2" />
         <activity android:name=".EnterDetails" />

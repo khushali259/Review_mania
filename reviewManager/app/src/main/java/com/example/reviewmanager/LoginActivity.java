@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (isEmailValid && isPasswordValid) {
             Toast.makeText(getApplicationContext(), "Successfully", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(getApplicationContext(),WriteReview.class);
+            Intent intent = new Intent(getApplicationContext(),HomeActivity.class);
             startActivity(intent);
         }
 

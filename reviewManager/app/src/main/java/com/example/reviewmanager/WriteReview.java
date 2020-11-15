@@ -42,7 +42,7 @@ public class WriteReview extends AppCompatActivity {
 
                 }
                 else{
-                    Intent intent  = new Intent(getApplicationContext(),EnterDetails.class);
+                    Intent intent  = new Intent(getApplicationContext(),EnterDetails2.class);
                     startActivity(intent);
                 }
 
