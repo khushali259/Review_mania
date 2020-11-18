@@ -3,15 +3,21 @@ package com.example.reviewmanager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.sql.Connection;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -20,11 +26,15 @@ public class RegisterActivity extends AppCompatActivity {
     TextView login;
     boolean isNameValid, isEmailValid, isPhoneValid, isPasswordValid;
     TextInputLayout nameError, emailError, phoneError, passError;
+    ScrollView scrollView;
+
+    private Database db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
+        db = new Database();
+        db.connectToDb();
         name = (EditText) findViewById(R.id.name);
         email = (EditText) findViewById(R.id.email);
         phone = (EditText) findViewById(R.id.phone);
@@ -35,6 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
         emailError = (TextInputLayout) findViewById(R.id.emailError);
         phoneError = (TextInputLayout) findViewById(R.id.phoneError);
         passError = (TextInputLayout) findViewById(R.id.passError);
+        scrollView = findViewById(R.id.scrollView);
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,9 +59,15 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // redirect to LoginActivity
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
+                RegisterActivity.this.startActivity(intent);
+                RegisterActivity.this.finish();
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+        super.finish();
+        super.onBackPressed();
     }
     public void SetValidation() {
         // Check for a valid name.
@@ -87,7 +104,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (password.getText().toString().isEmpty()) {
             passError.setError(getResources().getString(R.string.password_error));
             isPasswordValid = false;
-        } else if (password.getText().length() < 6) {
+        } else if (password.getText().length() < 5) {
             passError.setError(getResources().getString(R.string.error_invalid_password));
             isPasswordValid = false;
         } else  {
@@ -96,8 +113,28 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         if (isNameValid && isEmailValid && isPhoneValid && isPasswordValid) {
-            Toast.makeText(getApplicationContext(), "Successfully", Toast.LENGTH_SHORT).show();
+            registerUser();
         }
 
+    }
+
+    private void registerUser(){
+        int res = db.registerUser(name.getText().toString(), password.getText().toString(), phone.getText().toString(), email.getText().toString());
+        if(res>0){
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt("user_id",res);
+            editor.apply();
+            Intent intent = new Intent(RegisterActivity.this,HomeActivity.class);
+            RegisterActivity.this.startActivity(intent);
+            RegisterActivity.this.finish();
+        }else if(res==0){
+            Snackbar snackbar = Snackbar
+                    .make(scrollView, "User already exists", Snackbar.LENGTH_LONG);
+            snackbar.show();
+        }
+        else{
+            Toast.makeText(this, "Cannot register", Toast.LENGTH_SHORT).show();
+        }
     }
 }

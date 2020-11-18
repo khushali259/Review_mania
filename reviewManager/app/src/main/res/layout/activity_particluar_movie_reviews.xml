@@ -7,8 +7,9 @@
     tools:context=".ParticluarMovieReviews">
     <ListView
         android:id="@+id/movies_list"
+        android:layout_margin="8dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
     </ListView>
 
 </LinearLayout>

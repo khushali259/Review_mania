@@ -2,23 +2,31 @@ package com.example.reviewmanager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ParticluarMovieReviews extends AppCompatActivity {
-    String[] mobileArray = {"Android","IPhone","WindowsMobile","Blackberry",
-            "WebOS","Ubuntu","Windows7","Max OS X"};
+
+    Database db = new Database();
+    int movie_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_particluar_movie_reviews);
-
-        ArrayAdapter adapter = new ArrayAdapter<String>(this,
-                R.layout.listview_item, mobileArray);
+        Intent intent = getIntent();
+        movie_id = intent.getIntExtra("movie_id", 1);
+        db.connectToDb();
+        ArrayList<Review> reviews = db.listMovieReviews(movie_id);
+        ListAdapter customAdapter = new ListAdapter(this, R.layout.itemlistrow, reviews);
 
         ListView listView = (ListView) findViewById(R.id.movies_list);
-        listView.setAdapter(adapter);
+        listView.setAdapter(customAdapter);
     }
+
 }

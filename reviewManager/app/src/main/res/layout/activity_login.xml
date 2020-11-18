@@ -31,18 +31,18 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/emailError"
+                    android:id="@+id/usernameError"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp">
 
                     <EditText
-                        android:id="@+id/email"
+                        android:id="@+id/username"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:hint="@string/prompt_email"
-                        android:inputType="textEmailAddress"
+                        android:hint="@string/prompt_username"
+                        android:inputType="text"
                         android:maxLines="1"
                         android:paddingStart="5dp"
                         android:paddingLeft="5dp"
