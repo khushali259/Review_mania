@@ -32,9 +32,10 @@ public class ViewParticularReview extends AppCompatActivity {
         seeAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(),ParticluarMovieReviews.class);
+                Intent i = new Intent(ViewParticularReview.this, ParticluarMovieReviews.class);
                 i.putExtra("movie_id", mid);
-                startActivity(i);
+                ViewParticularReview.this.startActivity(i);
+                ViewParticularReview.this.finish();
             }
         });
 

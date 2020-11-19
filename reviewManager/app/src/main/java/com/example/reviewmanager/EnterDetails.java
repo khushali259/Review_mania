@@ -30,6 +30,7 @@ public class EnterDetails extends AppCompatActivity {
         db.connectToDb();
 
         title = findViewById(R.id.movie_name_edit);
+        title.setText(movie_name);
         director = findViewById(R.id.director_edit);
         year = findViewById(R.id.year_edit);
         review = findViewById(R.id.description_edit);

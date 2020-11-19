@@ -29,4 +29,11 @@ public class ParticluarMovieReviews extends AppCompatActivity {
         listView.setAdapter(customAdapter);
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ParticluarMovieReviews.this, ViewReview.class);
+        ParticluarMovieReviews.this.startActivity(intent);
+        ParticluarMovieReviews.this.finish();
+        //super.onBackPressed();
+    }
 }

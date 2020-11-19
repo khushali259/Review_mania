@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                 // redirect to RegisterActivity
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 LoginActivity.this.startActivity(intent);
-                LoginActivity.this.finish();
+                //LoginActivity.this.finish();
             }
         });
     }

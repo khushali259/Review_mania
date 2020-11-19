@@ -45,15 +45,12 @@ public class ViewActivity extends AppCompatActivity {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         int userId = preferences.getInt("user_id", 1);
         moviesArray = db.listMoviesById(userId);
-        String[] movieNames = new String[moviesArray.size()];
+        ArrayList<String> movieNames = new ArrayList<>();
         for(int i = 0; i<moviesArray.size();i++){
-            movieNames[i] = moviesArray.get(i).movie_name;
+            movieNames.add(moviesArray.get(i).movie_name);
         }
-        ArrayAdapter adapter = new ArrayAdapter<String>(this,
-                R.layout.listview_item, movieNames);
+        ViewActivityListAdapter customAdapter = new ViewActivityListAdapter(this, R.layout.listview_item, movieNames);
 
-        listView.setAdapter(adapter);
-
-        Toast.makeText(this, String.valueOf(moviesArray.size()), Toast.LENGTH_SHORT).show();
+        listView.setAdapter(customAdapter);
     }
 }

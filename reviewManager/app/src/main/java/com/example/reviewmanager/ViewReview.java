@@ -30,10 +30,11 @@ public class ViewReview extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent i = new Intent(getApplicationContext(), ViewParticularReview.class);
+                Intent i = new Intent(ViewReview.this, ViewParticularReview.class);
                 int mid = moviesArray.get(position).movie_id;
                 i.putExtra("movie_id", mid);
-                startActivity(i);
+                ViewReview.this.startActivity(i);
+                ViewReview.this.finish();
             }
         });
 
@@ -42,17 +43,10 @@ public class ViewReview extends AppCompatActivity {
 
     private void listAllMovies(){
         moviesArray = db.listMovies();
-        String[] movieNames = new String[moviesArray.size()];
-        for(int i = 0; i<moviesArray.size();i++){
-            movieNames[i] = moviesArray.get(i).movie_name;
-        }
-        Toast.makeText(this, "filled list", Toast.LENGTH_SHORT).show();
-        ArrayAdapter adapter = new ArrayAdapter<String>(this,
-                R.layout.listview_item, movieNames);
+        ViewReviewListAdapter adapter = new ViewReviewListAdapter(this, R.layout.listview_item2, moviesArray);
+
 
         listView.setAdapter(adapter);
-
-        Toast.makeText(this, String.valueOf(moviesArray.size()), Toast.LENGTH_SHORT).show();
     }
 
 }

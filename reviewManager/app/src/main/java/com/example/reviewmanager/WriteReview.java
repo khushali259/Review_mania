@@ -42,15 +42,17 @@ public class WriteReview extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(change==1){
-                    Intent intent  = new Intent(getApplicationContext(),EnterDetails.class);
+                    Intent intent  = new Intent(WriteReview.this, EnterDetails.class);
                     intent.putExtra("movie_name", enterMovie.getText().toString());
-                    startActivity(intent);
+                    WriteReview.this.startActivity(intent);
+                    WriteReview.this.finish();
 
                 }
                 else{
                     Intent intent  = new Intent(getApplicationContext(),EnterDetails2.class);
                     intent.putExtra("movie_name", movie_name);
-                    startActivity(intent);
+                    WriteReview.this.startActivity(intent);
+                    WriteReview.this.finish();
                 }
 
             }
@@ -74,7 +76,6 @@ public class WriteReview extends AppCompatActivity {
         });
         listAllMovies();
     }
-
 
 
     private void listAllMovies(){

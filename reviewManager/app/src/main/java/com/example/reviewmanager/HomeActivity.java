@@ -29,31 +29,27 @@ public class HomeActivity extends AppCompatActivity {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = preferences.edit();
 
-        l1.setOnTouchListener(new View.OnTouchListener() {
+        l1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this,ViewReview.class);
-                startActivity(intent);
-                return true;
+                HomeActivity.this.startActivity(intent);
             }
         });
 
-        l2.setOnTouchListener(new View.OnTouchListener() {
+        l2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this,ViewActivity.class);
-                startActivity(intent);
-                finish();
-                return true;
+                HomeActivity.this.startActivity(intent);
             }
         });
 
-        l3.setOnTouchListener(new View.OnTouchListener() {
+        l3.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this,WriteReview.class);
                 startActivity(intent);
-                return true;
             }
         });
 
